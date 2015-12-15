@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>URL checker</title>
-<?
-switch( get_class($this) ){
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 
-    case 'authController':
-?>
-    <link rel="stylesheet" href="./css/auth.css">
-<?
-	break;
-    case 'appsController':
-    default:
-?>
-    <link rel="stylesheet" href="./fonts/glyphter-font/css/Glyphter.css" />
-    <!--<link rel="stylesheet" href="./css/jquery-ui.min.css">-->
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>Hope TV admin</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-	<script src="./js/jquery-1.10.2.min.js"></script>
-    <!--<script src="./js/jquery.ui-1.10.4.min.js"></script>-->
-
-	<script src="./js/script.js"></script>
-
+    <!-- Styles -->
 <?
-//  less
+    switch (classModel::$controller){
+        case "auth":
+?><link href="css/login.css" rel="stylesheet"><?
+            break;
+        case "archive":
+?><link href="css/dashboard.css" rel="stylesheet"><?
+            break;
+    }
 ?>
-   <!-- <link rel="stylesheet/less" type="text/css" href="./css/style.less" />
-    <script src="./js/less.js"></script>-->
-<?
-	break;
-}
-?>
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div class="wrapper">

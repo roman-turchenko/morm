@@ -40,24 +40,6 @@ class classModel{
     }
 
 
-//  ++++ Menu
-    static function getMainMenuData(){
-        return array(
-
-            array('title'      => 'Applications list',
-                  'controller' => 'apps',
-                  'action'     => 'list'),
-
-            array('title'      => 'Platforms list',
-                  'controller' => 'platform',
-                  'action'     => 'list'),
-
-            array('title'      => 'User',
-                  'controller' => 'user',
-                  'action'     => 'list'),
-
-        );
-    }
 
 //  ++++ SESSION
     public static function setSession($key, $value = ''){
@@ -80,22 +62,13 @@ class classModel{
     public static function getSession( $key ){
 
         $result = null;
-        if( is_array($key) ) foreach( $key as $v ) $result[] = $_SESSION[$v];
+        if( is_array($key) ){
+            foreach( $key as $v ) $result[] = isset($_SESSION[$v]) ? $_SESSION[$v] : null;
+        }
         else
-            $result = $_SESSION[$key];
+            $result = isset($_SESSION[$key]) ? $_SESSION[$key] : null;
 
         return $result;
-    }
-
-    public static function getCurrentUserId(){
-        // get curent user data
-        $user_data = self::getSession('curent_user');
-        $_get_id_user = isset($_GET['id_user']) ? $_GET['id_user'] : null;
-        $_post_id_user = isset($_POST['id_user']) ? $_POST['id_user'] : null;
-        return
-            authModel::is_SuperUserSession()
-                ? ($_post_id_user ? $_post_id_user : ( $_get_id_user ? $_get_id_user : $user_data['id_user'] ))
-                : self::getSession('id_user');
     }
 }
 ?>

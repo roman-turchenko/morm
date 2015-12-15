@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/admin/.htaccess" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/controllers/archiveController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/controllers/authController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/controllers/mainController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/models/archiveModel.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/models/authModel.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/models/classModel.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/core/views/auth/main.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/css/login.css" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

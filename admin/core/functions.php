@@ -33,6 +33,5 @@ function _include( $path ){
 }
 
 function set_Json_header(){
-
     header('Content-type: application/json; charset=utf-8;');
 }

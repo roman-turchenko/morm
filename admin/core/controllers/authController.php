@@ -24,12 +24,12 @@ class authController extends classController{
             if( empty($login) )    authModel::$errors[] = 'Empty login';
             if( empty($password) ) authModel::$errors[] = 'Empty password';
 
-            if( !count(classModel::$errors) )
+            if( !count(authModel::$errors) )
                 $this->Authorize( $login, $password );
         }
 
-        echo $this->render('main', array(
-            'errors'    => classModel::$errors,
+        echo $this->render_main(array(
+            'errors'    => authModel::$errors,
             'user_data' => array('login' => $login),
         ));
     }
@@ -53,10 +53,10 @@ class authController extends classController{
                 'curent_user' => userModel::getUserData($id_user),
             ));
 
+            // go to main admin page
             header("Location: ".$this->makeURI(array(
-                    'controller' => 'apps',
-                    'action'     => 'list')));
-            die();
+                    'controller' => 'archive')));
+            exit();
         }else
             authModel::$errors[] = 'Wrong login\password';
 

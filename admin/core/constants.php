@@ -9,6 +9,7 @@
 /**
  * System constants
  */
+define('APP_ROOT_URL', '/admin');
 define('CORE_DIR', realpath(dirname(__FILE__)));
 define('CONTEROLLERS_DIR', CORE_DIR.'/controllers');
 define('VIEWS_DIR', CORE_DIR.'/views');

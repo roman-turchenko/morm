@@ -3,4 +3,5 @@ Order Deny,Allow
 #Allow from 195.160.253.4
 
 AddDefaultCharset UTF-8
+
 ErrorDocument 404 /admin/404.php
