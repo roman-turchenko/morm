@@ -1,10 +1,16 @@
 <?
 class classModel{
 
+    // current action
     public static  $action = null;
+    // current controller
     public static  $controller = null;
+    // errors array
     public static  $errors = array();
+    // messages array
     public static  $messages = array();
+    // administrative top menu html
+    public static  $adminTopMenu = null;
 
     function __construct(){
 
@@ -39,7 +45,11 @@ class classModel{
         return DB::getInstance()->queryError();
     }
 
-
+    public static function getAssocArray($res){
+        $result = array();
+        while ($r = self::fetchAssoc($res)) $result[] = $r;
+        return $result;
+    }
 
 //  ++++ SESSION
     public static function setSession($key, $value = ''){

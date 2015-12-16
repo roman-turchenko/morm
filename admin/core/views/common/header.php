@@ -16,6 +16,8 @@
 ?><link href="css/login.css" rel="stylesheet"><?
             break;
         case "archive":
+        case "broadcast":
+        case "users":
 ?><link href="css/dashboard.css" rel="stylesheet"><?
             break;
     }

@@ -19,6 +19,29 @@ class classController extends classView{
         if (!authModel::is_Authorized()){
             header("Location: ".$this->makeURI(array("controller" => "auth")));
         }
+
+        // create top menu
+        self::createTopMenu();
+    }
+
+    private function createTopMenu(){
+        classModel::$adminTopMenu = $this->render_common("adminTopMenu", array(
+            array(
+                "title" => "Archive",
+                "href"  => self::makeURI(array("controller" => "archive")),
+                "controller" => "archive"
+            ),
+            array(
+                "title" => "Broadcast",
+                "href"  => self::makeURI(array("controller" => "broadcast")),
+                "controller" => "broadcast"
+            ),
+            array(
+                "title" => "Users",
+                "href"  => self::makeURI(array("controller" => "users")),
+                "controller" => "users"
+            )
+        ));
     }
 
     public function makeURI( $data = array() ){
