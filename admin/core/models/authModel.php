@@ -8,6 +8,7 @@
 class authModel extends classModel{
 
     public static $logoutLink;
+    public static $userData  = array();
 
     function __construct(){
 
@@ -20,7 +21,7 @@ class authModel extends classModel{
      * Check login\password pare in base
      */
     public static function checkInBase( $login, $password ){
-        return userModel::checkInBase( $login, $password );
+        return usersModel::checkInBase( $login, $password );
     }
 
     public static function is_SuperUserSession(){

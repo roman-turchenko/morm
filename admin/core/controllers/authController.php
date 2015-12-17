@@ -45,12 +45,21 @@ class authController extends classController{
 
     private function Authorize( $login, $password ){
 
-        if( ($id_user = authModel::checkInBase($login, $password)) !== null ){
+        if (authModel::checkInBase($login, $password)){
 
-            authModel::setSession(array(
-                'id_user' => $id_user,
-                'login'   => true,
-                'curent_user' => userModel::getUserData($id_user),
+            classModel::setSession(array(
+                'login'   => true
+            ));
+
+            // set loggined user data
+            authModel::$userData = usersModel::getUser(
+                "login_user = '".classModel::escapeString($login)."' AND ".
+                "password_user = '".md5(classModel::escapeString($password))."'"
+            );
+
+            // write to session
+            classModel::setSession(array(
+                'userData' => authModel::$userData
             ));
 
             // go to main admin page

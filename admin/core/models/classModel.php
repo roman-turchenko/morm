@@ -12,9 +12,7 @@ class classModel{
     // administrative top menu html
     public static  $adminTopMenu = null;
 
-    function __construct(){
-
-    }
+    function __construct(){}
 
 //  ++++ MySql
     /**
@@ -47,8 +45,13 @@ class classModel{
 
     public static function getAssocArray($res){
         $result = array();
-        while ($r = self::fetchAssoc($res)) $result[] = $r;
+        while ($r = self::fetchAssoc($res)) $result += $r;
         return $result;
+    }
+
+    public static function checkInTable($table, $condition){
+        $sql = "SELECT * FROM ".$table." WHERE ".$condition;
+        return self::numRows(self::query($sql));
     }
 
 //  ++++ SESSION

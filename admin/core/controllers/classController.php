@@ -12,12 +12,17 @@ class classController extends classView{
 
     function __construct(){
 
+        // clear messages and errors
+        classModel::$errors = classModel::$messages = array();
+
         // set logout link
         authModel::$logoutLink = $this->makeURI(array("controller" => "auth", "action" => "logout"));
 
         // check logining
         if (!authModel::is_Authorized()){
             header("Location: ".$this->makeURI(array("controller" => "auth")));
+        }else{
+            authModel::$userData = classModel::getSession("userData");
         }
 
         // create top menu
@@ -60,7 +65,7 @@ class classController extends classView{
         if( authModel::is_SuperUserSession() )
             $result[] = 'id_user='.classModel::getCurrentUserId();
 */
-    return APP_ROOT_URL.(count($result) > 0 ? '?'.implode('&', $result) : '');
+    return APP_ROOT_URL.(count($result) > 0 ? '/?'.implode('&', $result) : '');
     }
 
     public static function st_makeURI( $data ){
@@ -75,4 +80,11 @@ class classController extends classView{
         return $this->instances[$name];
     }
 
+    public function preparePost($data){
+        foreach ($data as $k => $v){
+            if (is_string($v))
+                $data[$k] = trim($v);
+        }
+        return $data;
+    }
 }
