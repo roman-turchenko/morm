@@ -9,6 +9,11 @@ class usersController extends classController{
 			"controller" => "users",
 			"action" => "getData"
 		));
+
+        usersModel::$urlPerformForm = $this->makeURI(array(
+            "controller" => "users",
+            "action" => "performForm"
+        ));
 	}
 
 
@@ -57,6 +62,34 @@ class usersController extends classController{
 		return;
 	}
 
+    public function performFormAction(){
+
+        $result = array();
+
+        if (check_RequestMethod()){
+
+            if ($this->checkData($_POST)){
+
+                if ($_POST['id_user'] == "new"){
+
+                    print usersModel::createUser($_POST);
+
+
+                }else{
+                    usersModel::updateUser($_POST);
+                }
+
+            }else{
+                $result['errors'] = usersModel::$errors;
+            }
+
+            set_Json_header();
+            print json_encode($result);
+            exit();
+        }else
+            _404();
+    }
+
 
 //+ Private section
 
@@ -64,8 +97,23 @@ class usersController extends classController{
 
 		$data = parent::preparePost($data);
 
-		if (isset($data['id_user']) && !is_numeric($data['id_user']))
-			usersModel::$errors[] = "Incorrect user id";
+        if ($data['id_user'] !== "new")
+            if (isset($data['id_user']) && !is_numeric($data['id_user']))
+                usersModel::$errors[] = "Incorrect user id";
+
+        if (empty($data['login_user']))
+            usersModel::$errors[] = "Empty user login";
+        elseif (strlen($data['login_user']) < 4)
+            usersModel::$errors[] = "User login to short. Use at least 4 characters.";
+
+
+        if ($data['id_user'] == "new"){
+            if (empty($data['password']))
+                usersModel::$errors[] = "Empty user's password";
+        }
+
+        if (!empty($data['password']) && $data['password'] !== $data['confirmPassword'])
+            usersModel::$errors[] = "Password and confirm password don't match";
 
 		return count(usersModel::$errors) === 0;
 	}

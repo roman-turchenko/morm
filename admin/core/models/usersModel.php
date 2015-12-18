@@ -5,6 +5,8 @@ class usersModel extends classModel{
     public static $usersList = array();
     // get user data api link
     public static $apiGetUserData;
+    // perform form link
+    public static $urlPerformForm;
 
     // table
     private static $table = "users";
@@ -30,6 +32,21 @@ class usersModel extends classModel{
             "login_user = '".parent::escapeString($login)."' AND ".
             "password_user = '".md5(parent::escapeString(($password)))."'"
         ) !== 0;
+    }
+
+    public static function createUser($data){
+        $sql =
+            "INSERT INTO ".self::$table." SET ".
+            "email_user = '".parent::escapeString($data['email_user'])."',".
+            "login_user = '".parent::escapeString($data['login_user'])."',".
+            "password_user = '".md5(parent::escapeString($data['login_user']))."'";
+
+        parent::query($sql);
+        return parent::queryError();
+    }
+
+    public static function updateUser($data){
+
     }
 }
 ?>

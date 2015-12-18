@@ -42,34 +42,46 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Login</label>
+                        <label for="inputLogin" class="col-sm-2 control-label">Login</label>
                         <div class="col-sm-10">
-                            <input name="login_user" type="string" class="form-control" id="inputEmail3" placeholder="Type user's login">
+                            <input name="login_user" type="string" class="form-control" id="inputLogin" placeholder="Type user's login">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
+                        <label for="inputEmail" class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-10">
-                            <input name="email_user" type="email" class="form-control" id="inputEmail3" placeholder="Type user's e-mail">
+                            <input name="email_user" type="email" class="form-control" id="inputEmail" placeholder="Type user's e-mail">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="New password">
-                        </div>
-                        <label for="inputPassword3" class="col-sm-2 control-label">&nbsp;</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Confirm new password">
+                            <input name="password" type="password" class="form-control" id="inputPassword" placeholder="New password">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <input type="hidden" name="id_user" value="" />
-                            <button type="submit" class="btn btn-primary">Add new user</button>
+                            <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm new password">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="hidden" name="id_user" value="" />
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <!-- Errors -->
+                            <div class="alert alert-danger"></div>
+                            <!-- All good-->
+                            <div class="alert alert-success"></div>
+                        </div>
+                    <div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -97,18 +109,37 @@
 <!-- Add remove and delete -->
 <script>
 
+    var alertDanger  = $(".alert-danger"),
+        alertSuccess = $(".alert-success");
+
+    function clearForm(){
+        // clear form
+        $("#form").clearForm();
+        // hide messages
+        alertDanger.hide();
+        alertSuccess.hide();
+
+        alertDanger.html("");
+        alertSuccess.html("");
+    }
+
     $('#form').on('show.bs.modal', function(e){
 
         var userId = e.relatedTarget.dataset.userid,
-            that = this;
+            that = this,
+            header = $(e.target).find("h4");
+
+        clearForm();
+
         // set user id
         $(this).find("input[name='id_user']").val(userId);
 
         if (userId !== "new"){
 
             $.post("<?=usersModel::$apiGetUserData?>", {"id_user": userId}, function(r){
-                console.log(r);
-
+                // set header
+                header.html("Edit user "+ r.data.login_user);
+                // write data to inputs
                 if (Object.keys(r.data)){
                     $.each(r.data, function(k,v){
                         console.log(k, v);
@@ -117,18 +148,47 @@
                     });
                 }
             });
+
+        }else{
+            header.html("Add new user");
         }
 
 
     }).on('hide.bs.modal', function(e){
 
-        // resset all inputs
-        $.each($(this).find("input"), function(k,v){
-            $(v).val("");
-        });
+        clearForm();
 
-    }).ajaxForm(function() {
-        alert("Thank you for your comment!");
+    }).ajaxForm({
+        url: "<?=usersModel::$urlPerformForm?>",
+        dataType: "json",
+        type: "POST",
+        beforeSubmit: function(){
+            alertDanger.hide();
+            alertSuccess.hide();
+
+            alertDanger.html("");
+            alertSuccess.html("");
+        },
+        complete: function(xhr, status){
+           console.log("complete", xhr, status);
+            if (status == "success"){
+
+                var data = xhr.responseJSON;
+
+                console.log(data);
+
+                if (typeof data.errors == "object"){
+                    $.each(data.errors, function(k,v){
+                        alertDanger.append("<p>"+v+"</p>");
+                    });
+
+                    alertDanger.fadeIn();
+                }
+
+            }else{
+                alertDanger.append("<p>Submitting error</p>");
+            }
+        }
     });
 
 </script>
