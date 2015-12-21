@@ -15,6 +15,10 @@ class DB{
         if( $this->link == null )
             $this->link = mysqli_connect('localhost','root','','mormons')
             or die("Error " . mysqli_error($this->link));
+
+        if ($this->link !== null){
+            $this->query("set names utf8");
+        }
     }
 
     private function __clone(){}

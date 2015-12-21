@@ -23,17 +23,9 @@ class usersController extends classController{
 
 		$content = null;
 
-		switch (classModel::$action){
-			default:
-				usersModel::getUsers();
-				// /users/main view
-				$content = $this->render("main", array(usersModel::$usersList));
-				break;
-		}
-
-
+        usersModel::getUsers();
 		echo $this->render_main_admin(array(
-			"content" => $content
+			"content" => $this->render("main", array(usersModel::$usersList))
 		));
 
 		return;
@@ -71,6 +63,9 @@ class usersController extends classController{
             if ($this->checkData($_POST)){
 
                 if ($_POST['id_user'] == "new"){
+
+                    $user_data = usersModel::getUser("login_user = '".usersModel::escapeString($_POST['login_user'])."'");
+
 
                     print usersModel::createUser($_POST);
 

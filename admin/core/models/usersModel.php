@@ -41,6 +41,8 @@ class usersModel extends classModel{
             "login_user = '".parent::escapeString($data['login_user'])."',".
             "password_user = '".md5(parent::escapeString($data['login_user']))."'";
 
+        print $sql;
+
         parent::query($sql);
         return parent::queryError();
     }

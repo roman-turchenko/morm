@@ -79,13 +79,14 @@
                             <!-- All good-->
                             <div class="alert alert-success"></div>
                         </div>
-                    <div>
+                    </div>
                 </form>
 
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Delete confirm -->
 <div class="modal fade delete-user" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
