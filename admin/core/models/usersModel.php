@@ -1,8 +1,6 @@
 <?
 class usersModel extends classModel{
 
-    // list of users
-    public static $usersList = array();
     // get user data api link
     public static $apiGetUserData;
     // perform form link
@@ -15,8 +13,7 @@ class usersModel extends classModel{
 
     public static function getUsers($order = "id_user"){
         $sql = "SELECT * FROM ".self::$table.($order ? " ORDER BY ".$order : "");
-        self::$usersList = parent::getAssocArray(parent::query($sql));
-        return;
+        return parent::getAssocArray(parent::query($sql));
     }
 
     public static function getUser($condition){

@@ -31,6 +31,15 @@ class usersController extends classController{
 		return;
 	}
 
+    public function getUsersAction(){
+
+        echo $this->render("usersList", array(
+            "usersData" => usersModel::getUsers()
+        ));
+
+        return;
+    }
+
 	public function getDataAction(){
 
 		$result = array();
