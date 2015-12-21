@@ -1,0 +1,56 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.0.2
+-- http://www.phpmyadmin.net
+--
+-- Хост: 127.0.0.1
+-- Время создания: Дек 21 2015 г., 23:42
+-- Версия сервера: 10.0.17-MariaDB
+-- Версия PHP: 5.6.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- База данных: `yii2basic`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `country`
+--
+
+CREATE TABLE `country` (
+  `code` char(2) NOT NULL,
+  `name` char(52) NOT NULL,
+  `population` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `country`
+--
+
+INSERT INTO `country` (`code`, `name`, `population`) VALUES
+('AU', 'Australia1', 18886000),
+('BR', 'Brazil', 170115000),
+('CA', 'Canada', 1147000),
+('CN', 'China', 1277558000),
+('DE', 'Germany', 82164700),
+('FR', 'France', 59225700),
+('GB', 'United Kingdom', 59623400),
+('IN', 'India', 1013662000),
+('RU', 'Russia', 146934000),
+('TU', 'Turkey', 2147483647),
+('TY', 'Test234234', 2147483647),
+('UA', 'Ukraine', 2147483647),
+('US', 'United States', 278357000);
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`code`);
