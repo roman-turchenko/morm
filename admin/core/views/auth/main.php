@@ -5,16 +5,5 @@
 		<input name="login" type="login" class="form-control" placeholder="Login" required="" autofocus="" value="<?=$params['user_data']['login']?>">
 		<input name="password" type="password" class="form-control" placeholder="Password" required=""><br />
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
-<?
-if (!empty($params['errors'])) {
-	?>
-	<br />
-	<div class="alert alert-danger">
-		<strong>Oh snap!</strong> <?=implode("<br />", $params['errors']);?>
-	</div>
-	<?
-}
-?>
 	</form>
 </div>

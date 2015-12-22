@@ -61,6 +61,7 @@ $config = [
 
     /* change default controller from /controllers/SiteController.php to /controllers/MainController.php */
     //'defaultRoute' => 'main',
+    'defaultRoute' => 'auth/index'
 ];
 
 if (YII_ENV_DEV) {
