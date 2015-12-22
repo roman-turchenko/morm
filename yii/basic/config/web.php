@@ -38,8 +38,29 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+
+/* How to made clean url http://stackoverflow.com/questions/29885970/how-to-remove-url-web-index-php-yii-2-and-set-route-with-parameter-with-clean*/
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                // your rules go here
+/*                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',*/
+            ],
+            // ...
+        ],
     ],
+
+    // Define language for many default modules, also sets localisation params as currency, date\time etc
+    //'language' => 'en',
+
     'params' => $params,
+
+    /* change default controller from /controllers/SiteController.php to /controllers/MainController.php */
+    //'defaultRoute' => 'main',
 ];
 
 if (YII_ENV_DEV) {
